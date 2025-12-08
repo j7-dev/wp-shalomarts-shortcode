@@ -1,22 +1,9 @@
 import { useRef, useEffect, useState } from 'react'
 import bg from '@/assets/images/bg.png'
-import { AbsImage, ListDataItem, MapIcon } from '@/components'
-import { LIST_DATA, MAP_DATA } from '@/utils'
+import { AbsImage, ListDataItem, MapIcon, Card } from '@/components'
+import { LIST_DATA, MAP_DATA, CARD_DATA } from '@/utils'
 
 function DefaultPage() {
-
-	const allMaps = MAP_DATA.reduce((acc, item) => {
-		const formatedMaps = item.maps.map(mapItem => ({
-			...mapItem,
-			building: item.building,
-		}))
-		return [...acc, ...formatedMaps]
-	}, [] as {
-		postId: number,
-		top: number,
-		left: number,
-		building: string,
-	}[])
 	const bgRef = useRef<HTMLDivElement>(null)
 	const [height, setHeight] = useState('0rem')
 
@@ -57,13 +44,21 @@ function DefaultPage() {
 					left={74}
 				/>
 
-				{allMaps.map(({ postId, top, left, building }) => (
+				{MAP_DATA.map(({ postId, top, left, building }) => (
 					<MapIcon
 						key={`${postId}${top}${left}`}
 						building={building}
 						postId={postId}
 						top={top}
 						left={left}
+					/>
+				))}
+
+
+				{CARD_DATA.map((card) => (
+					<Card
+						key={card.postId}
+						{...card}
 					/>
 				))}
 

@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { MAP_DATA } from '@/utils'
-import { TMapData } from '@/types'
 import { useAtomValue } from 'jotai'
 import { selectedDataAtom } from '@/pages/atom';
 
@@ -15,11 +14,10 @@ export const AbsImage: FC<{
 	top = 0,
 	left = 0,
 }) => {
-		const data = MAP_DATA.find(item => item.building === className)
-		const maps = (data?.maps || []) as TMapData['maps']
+		const maps = MAP_DATA.filter(item => item.building === className) || []
 		const includeIds = maps.map(item => item.postId)
 		const selectedData = useAtomValue(selectedDataAtom);
-		const isImageSelected = selectedData.postId !== 0 && includeIds.includes(selectedData.postId) && (selectedData.selectAllIcons || selectedData.building === className);
+		const isImageSelected = !!selectedData.postId && includeIds.includes(selectedData.postId) && (selectedData.selectAllIcons || selectedData.building === className);
 
 		return (
 			<div className={`sh-abs-image ${className} ${isImageSelected ? 'sh-hovered' : ''}`} style={{

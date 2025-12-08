@@ -93,84 +93,87 @@ final class Bootstrap {
 		return \sprintf('<div id="%s"></div>', \substr(Base::APP1_SELECTOR, 1) );
 	}
 
-	/** @return array<int, array<string, mixed>> */
+	/** @return array<int, array{
+	 * 'postId': int,
+	 * 'building': string,
+	 * 'top': int,
+	 * 'left': int
+	 * }>
+	 */
 	private static function get_map_data(): array {
 
 		return [
 			[
+				'postId'   => 32090,
 				'building' => 'building1',
-				'maps'     => [
-					[
-						'postId' => 32090,
-						'top'    => 61,
-						'left'   => 23,
-					],
-					[
-						'postId' => 32084,
-						'top'    => 64,
-						'left'   => 22,
-					],
-					[
-						'postId' => 32087,
-						'top'    => 69,
-						'left'   => 17,
-					],
-				],
+				'top'      => 61,
+				'left'     => 23,
 			],
 			[
+				'postId'   => 32084,
+				'building' => 'building1',
+				'top'      => 64,
+				'left'     => 22,
+			],
+			[
+				'postId'   => 32087,
+				'building' => 'building1',
+				'top'      => 69,
+				'left'     => 17,
+			],
+			[
+				'postId'   => 31564,
 				'building' => 'building2',
-				'maps'     => [
-					[
-						'postId' => 31564,
-						'top'    => 52,
-						'left'   => 50,
-					],
-					[
-						'postId' => 32072,
-						'top'    => 47,
-						'left'   => 53,
-					],
-					[
-						'postId' => 32069,
-						'top'    => 50,
-						'left'   => 56,
-					],
-				],
+				'top'      => 52,
+				'left'     => 50,
 			],
 			[
+				'postId'   => 32072,
+				'building' => 'building2',
+				'top'      => 47,
+				'left'     => 53,
+			],
+			[
+				'postId'   => 32069,
+				'building' => 'building2',
+				'top'      => 50,
+				'left'     => 56,
+			],
+			[
+				'postId'   => 32069,
 				'building' => 'building3',
-				'maps'     => [
-					[
-						'postId' => 32069,
-						'top'    => 51,
-						'left'   => 66,
-					],
-					[
-						'postId' => 31874,
-						'top'    => 52,
-						'left'   => 69,
-					],
-					[
-						'postId' => 32075,
-						'top'    => 49,
-						'left'   => 71,
-					],
-					[
-						'postId' => 31874,
-						'top'    => 52,
-						'left'   => 77,
-					],
-					[
-						'postId' => 32081,
-						'top'    => 48,
-						'left'   => 77,
-					],
-					[
-						'postId' => 32069,
-						'top'    => 48,
-						'left'   => 81,
-					],
-				],
+				'top'      => 51,
+				'left'     => 66,
+			],
+			[
+				'postId'   => 31874,
+				'building' => 'building3',
+				'top'      => 52,
+				'left'     => 69,
+			],
+			[
+				'postId'   => 32075,
+				'building' => 'building3',
+				'top'      => 49,
+				'left'     => 71,
+			],
+			[
+				'postId'   => 31874,
+				'building' => 'building3',
+				'top'      => 52,
+				'left'     => 77,
+			],
+			[
+				'postId'   => 32081,
+				'building' => 'building3',
+				'top'      => 48,
+				'left'     => 77,
+			],
+			[
+				'postId'   => 32069,
+				'building' => 'building3',
+				'top'      => 48,
+				'left'     => 81,
 			],
 		];
 	}
@@ -184,7 +187,6 @@ final class Bootstrap {
 	 *  'location': string
 	 * }> */
 	private static function get_list_data(): array {
-		$map_data  = self::get_map_data();
 		$post_ids  = self::get_unique_post_ids();
 		$list_data = [];
 		foreach ($post_ids as $post_id) {
@@ -205,49 +207,39 @@ final class Bootstrap {
 	 *  'title': string,
 	 *  'link': string
 	 *  'image': string
+	 * 'left': float,
+	 * 'top': int
 	 * }> */
 	private static function get_card_data(): array {
-		$map_data = self::get_map_data();
-		$all_maps = array_merge(...array_column($map_data, 'maps')); // phpstan-ignore-line
+		$map_data  = self::get_map_data();
+		$post_ids  = self::get_unique_post_ids();
+		$card_data = [];
+		foreach ($post_ids as $post_id) {
+			$maps     = array_filter($map_data, static fn( $item ) => $item['postId'] === $post_id);
+			$avg_left = array_sum(array_column($maps, 'left')) / count($maps);
+			$min_top  = min(array_column($maps, 'top'));
 
-		$card_data = \array_reduce(
-			$all_maps,
-			static function ( $carry, $item ) {
-				$post_id = $item['postId'];
-				if ( ! isset( $carry[ $post_id ] ) ) {
-					$carry[ $post_id ] = [
-						'postId' => $post_id,
-						'title'  => \get_the_title( $post_id ) ?: '文章標題',
-						'link'   => \get_permalink( $post_id ) ?: \site_url(),
-						'image'  => \get_the_post_thumbnail_url( $post_id ) ?: '',
-					];
-				}
-				return $carry;
-			},
-			[]
-		);
-		// foreach ($post_ids as $post_id) {
-		// $card_data[] = [
-		// 'postId' => $post_id,
-		// 'title'  => \get_the_title( $post_id ) ?: '文章標題',
-		// 'link'   => \get_permalink( $post_id ) ?: \site_url(),
-		// 'top'  => \get_the_post_thumbnail_url( $post_id ) ?: '',
-		// 'left' => \get_the_post_thumbnail_url( $post_id ) ?: '',
-		// ];
-		// }
-		return $all_maps;
+			$card_data[] = [
+				'postId' => $post_id,
+				'title'  => \get_the_title( $post_id ) ?: '文章標題',
+				'link'   => \get_permalink( $post_id ) ?: \site_url(),
+				'image'  => \get_the_post_thumbnail_url( $post_id ) ?: '',
+				'left'   => $avg_left,
+				'top'    => $min_top,
+			];
+		}
+
+		return $card_data;
 	}
 
 
 	/** @return array<int> */
 	private static function get_unique_post_ids(): array {
 		$map_data = self::get_map_data();
-		$post_ids = array_unique(
-			array_column(
-				array_merge(...array_column($map_data, 'maps')), // phpstan-ignore-line
-				'postId'
-			)
-		);
-		return $post_ids;
+		$post_ids = [];
+		foreach ( $map_data as $data ) {
+			$post_ids[] = $data['postId'];
+		}
+		return \array_values( \array_unique( $post_ids ) );
 	}
 }

@@ -20,4 +20,5 @@ export const NONCE = env?.NONCE || ''
 export const APP1_SELECTOR = env?.APP1_SELECTOR || 'shalomarts_shortcode'
 export const ELEMENTOR_ENABLED = env?.ELEMENTOR_ENABLED || false
 export const MAP_DATA = (env?.MAP_DATA || []) as TMapData[]
+export const CARD_DATA = (env?.CARD_DATA || []) as TCardData[]
 export const LIST_DATA = (env?.LIST_DATA || []) as TListData[]
