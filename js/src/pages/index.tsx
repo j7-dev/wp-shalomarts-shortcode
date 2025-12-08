@@ -65,7 +65,7 @@ function DefaultPage() {
 
 				</div>
 			</div>
-			<div className="sh-w-full lg:sh-flex-1 sh-bg-white sh-p-4 sh-overflow-y-auto" style={{
+			<div className="sh-w-full lg:sh-flex-1 sh-bg-white sh-p-2.5 sh-overflow-y-auto" style={{
 				height,
 			}}>
 				{
