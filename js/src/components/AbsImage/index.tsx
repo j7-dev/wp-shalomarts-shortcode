@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { MapIcon } from '@/components'
 import { MAP_DATA } from '@/utils'
 import { TMapData } from '@/types'
 import { useAtomValue } from 'jotai'
@@ -20,7 +19,7 @@ export const AbsImage: FC<{
 		const maps = (data?.maps || []) as TMapData['maps']
 		const includeIds = maps.map(item => item.postId)
 		const selectedData = useAtomValue(selectedDataAtom);
-		const isImageSelected = selectedData.postId !== 0 && includeIds.includes(selectedData.postId) && selectedData.selectAll;
+		const isImageSelected = selectedData.postId !== 0 && includeIds.includes(selectedData.postId) && (selectedData.selectAllIcons || selectedData.building === className);
 
 		return (
 			<div className={`sh-abs-image ${className} ${isImageSelected ? 'sh-hovered' : ''}`} style={{
@@ -28,14 +27,6 @@ export const AbsImage: FC<{
 				top: `${top}%`,
 				left: `${left}%`,
 			}}>
-				{maps.map(({ postId, top, left }) => (
-					<MapIcon
-						key={`${postId}${top}${left}`}
-						postId={postId}
-						top={top}
-						left={left}
-					/>
-				))}
 			</div>
 		)
 	}

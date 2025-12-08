@@ -17,7 +17,8 @@ export const ListDataItem: FC<{
 		if (hovering) {
 			setSelectedData({
 				postId,
-				selectAll: true
+				selectAllIcons: true,
+				building: undefined,
 			});
 		}
 	}, [hovering]);

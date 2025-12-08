@@ -1,6 +1,11 @@
 import { atom } from 'jotai'
 
-export const selectedDataAtom = atom({
+export const selectedDataAtom = atom<{
+	postId: number,
+	selectAllIcons: boolean,
+	building?: string,
+}>({
 	postId: 0,
-	selectAll: true
+	selectAllIcons: true,
+	building: undefined,
 })

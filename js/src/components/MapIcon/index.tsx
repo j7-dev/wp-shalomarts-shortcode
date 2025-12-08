@@ -6,11 +6,13 @@ import { selectedDataAtom } from '@/pages/atom';
 export const MapIcon: FC<{
 	postId: number,
 	className?: string,
+	building: string,
 	top: number,
 	left: number,
 }> = ({
 	postId,
 	className = '',
+	building,
 	top = 0,
 	left = 0,
 
@@ -22,13 +24,14 @@ export const MapIcon: FC<{
 			if (!hovering) return;
 			setSelectedData({
 				postId,
-				selectAll: false
+				selectAllIcons: false,
+				building,
 			})
 
 		}, [hovering]);
 
 
-		const isSelected = selectedData.postId === postId && (selectedData.selectAll || hovering);
+		const isSelected = selectedData.postId === postId && (selectedData.selectAllIcons || hovering);
 
 		return (
 			<div ref={ref} className={`sh-map-icon ${className} ${isSelected ? 'sh-hovered' : ''}`} style={{
