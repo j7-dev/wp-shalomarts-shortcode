@@ -57,7 +57,7 @@ final class Plugin {
 			[
 				'app_name'    => 'Shalomarts Shortcode',
 				'github_repo' => 'https://github.com/j7-dev/wp-shalomarts-shortcode',
-				'callback'    => [ Bootstrap::class, 'instance' ],
+				'callback'    => [ Bootstrap::class, 'register_hooks' ],
 			]
 		);
 	}
