@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
+import { TMapData, TListData } from '@/types'
 
 const APP_DOMAIN = 'shalomarts_shortcode_data' as string
 
@@ -18,4 +19,5 @@ export const SNAKE = env?.SNAKE || 'shalomarts_shortcode'
 export const NONCE = env?.NONCE || ''
 export const APP1_SELECTOR = env?.APP1_SELECTOR || 'shalomarts_shortcode'
 export const ELEMENTOR_ENABLED = env?.ELEMENTOR_ENABLED || false
-
+export const MAP_DATA = (env?.MAP_DATA || []) as TMapData[]
+export const LIST_DATA = (env?.LIST_DATA || []) as TListData[]

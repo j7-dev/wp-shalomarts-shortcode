@@ -1,11 +1,26 @@
+import { useRef, useEffect, useState } from 'react'
 import bg from '@/assets/images/bg.png'
-import { AbsImage, MapIcon } from '@/components'
+import { AbsImage, ListDataItem } from '@/components'
+import { LIST_DATA } from '@/utils'
 
 function DefaultPage() {
 
+	const bgRef = useRef<HTMLDivElement>(null)
+	const [height, setHeight] = useState('0rem')
+
+	useEffect(() => {
+		if (!bgRef.current) {
+			setHeight('auto')
+			return
+		}
+
+		setHeight(`${bgRef.current.clientHeight}px`)
+
+	}, [bgRef])
+
 	return (
 		<div className="sh-flex">
-			<div className="sh-w-[80%] sh-aspect-[1.814143] sh-bg-cover sh-bg-no-repeat sh-bg-center sh-relative" style={{
+			<div ref={bgRef} className="sh-w-[80%] sh-aspect-[1.814143] sh-bg-cover sh-bg-no-repeat sh-bg-center sh-relative" style={{
 				backgroundImage: `url(${bg})`,
 			}}>
 
@@ -32,7 +47,19 @@ function DefaultPage() {
 
 
 			</div>
-			<div className="sh-flex-1 sh-bg-white"></div>
+			<div className="sh-flex-1 sh-bg-white sh-p-4 sh-overflow-y-auto" style={{
+				height,
+			}}>
+				{
+					LIST_DATA.map((list) => (
+						<ListDataItem
+							key={list.postId}
+							{...list} />
+					))
+				}
+
+
+			</div>
 
 
 

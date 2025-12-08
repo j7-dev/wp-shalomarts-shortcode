@@ -1,19 +1,37 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import { useHover } from '@uidotdev/usehooks'
+import { useAtom } from 'jotai';
+import { selectedDataAtom } from '@/pages/atom';
 
 export const MapIcon: FC<{
+	postId: number,
 	className?: string,
 	top: number,
 	left: number,
-	isSelected?: boolean,
 }> = ({
+	postId,
 	className = '',
 	top = 0,
 	left = 0,
-	isSelected = false,
+
 }) => {
+		const [ref, hovering] = useHover();
+		const [selectedData, setSelectedData] = useAtom(selectedDataAtom);
+
+		useEffect(() => {
+			if (!hovering) return;
+			setSelectedData({
+				postId,
+				selectAll: false
+			})
+
+		}, [hovering]);
+
+
+		const isSelected = selectedData.postId === postId && (selectedData.selectAll || hovering);
 
 		return (
-			<div className='sh-map-icon' style={{
+			<div ref={ref} className={`sh-map-icon ${className} ${isSelected ? 'sh-hovered' : ''}`} style={{
 				top: `${top}%`,
 				left: `${left}%`,
 			}}>
