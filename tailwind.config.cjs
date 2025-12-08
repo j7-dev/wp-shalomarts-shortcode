@@ -2,6 +2,7 @@
 // eslint-disable-next-line no-undef
 module.exports = {
 	// important: '.tailwind', // you need to use tailwindcss in a .tailwind class
+	prefix: 'sh-',
 	corePlugins: {
 		preflight: false,
 		container: false, // conflicted with WordPress

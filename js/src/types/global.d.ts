@@ -12,7 +12,6 @@ declare global {
 			SNAKE: string
 			NONCE: string
 			APP1_SELECTOR: string
-			APP2_SELECTOR: string
 			ELEMENTOR_ENABLED: boolean
 		}
 	}

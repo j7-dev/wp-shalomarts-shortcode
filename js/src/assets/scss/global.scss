@@ -22,10 +22,10 @@ div[class^="ant-"] {
 	}
 
 	ins {
-		@apply text-red-500 ml-1 no-underline;
+		@apply sh-text-red-500 sh-ml-1 sh-no-underline;
 	}
 	del {
-		@apply text-gray-400;
+		@apply sh-text-gray-400;
 	}
 	input[class*="ant-select"] {
 		box-shadow: none !important;
@@ -44,10 +44,10 @@ div[class^="ant-"] {
 
 	.antd-form-sm {
 		div.ant-form-item {
-			@apply mb-2;
+			@apply sh-mb-2;
 		}
 		div.ant-form-item-label {
-			@apply pb-0 text-xs;
+			@apply sh-pb-0 sh-text-xs;
 		}
 	}
 

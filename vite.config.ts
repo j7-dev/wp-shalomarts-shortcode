@@ -9,6 +9,7 @@ import { v4wp } from '@kucrut/vite-for-wp'
 
 export default {
   server: {
+		port: 5174,
 		cors: {
 			origin: '*',
 		},

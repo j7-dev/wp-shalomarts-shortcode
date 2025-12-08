@@ -17,6 +17,5 @@ export const KEBAB = env?.KEBAB || 'shalomarts-shortcode'
 export const SNAKE = env?.SNAKE || 'shalomarts_shortcode'
 export const NONCE = env?.NONCE || ''
 export const APP1_SELECTOR = env?.APP1_SELECTOR || 'shalomarts_shortcode'
-export const APP2_SELECTOR = env?.APP2_SELECTOR || 'shalomarts_shortcode_metabox'
 export const ELEMENTOR_ENABLED = env?.ELEMENTOR_ENABLED || false
 

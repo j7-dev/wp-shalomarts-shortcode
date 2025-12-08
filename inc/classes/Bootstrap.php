@@ -12,12 +12,10 @@ if ( class_exists( 'J7\ShalomartsShortcode\Bootstrap' ) ) {
 }
 /** Class Bootstrap */
 final class Bootstrap {
-	use \J7\WpUtils\Traits\SingletonTrait;
 
 	/** Register Hooks */
 	public static function register_hooks(): void {
 		\add_action( 'wp_enqueue_scripts', [ __CLASS__, 'frontend_enqueue_script' ], 99 );
-
 		\add_action( 'init', [ __CLASS__, 'register_shortcodes' ] );
 	}
 
@@ -65,7 +63,6 @@ final class Bootstrap {
 			'SNAKE'             => Plugin::$snake,
 			'NONCE'             => \wp_create_nonce( 'wp_rest' ),
 			'APP1_SELECTOR'     => Base::APP1_SELECTOR,
-			'APP2_SELECTOR'     => Base::APP2_SELECTOR,
 			'ELEMENTOR_ENABLED' => \in_array( 'elementor/elementor.php', $active_plugins, true ), // 檢查 elementor 是否啟用
 		];
 
