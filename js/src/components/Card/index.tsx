@@ -16,12 +16,12 @@ export const Card: FC<TCardData> = ({
 	const isShow = !!selectedData.postId && selectedData.postId === postId;
 	return (
 		<a href={link} target="_blank">
-			<div className="sh-map-icon-card" style={{
-				top: `calc(${top}% - 1.5rem)`,
-				left: `${left}%`,
-				display: isShow ? 'block' : 'none',
-			}}>
-				<img decoding="async" src={image || defaultImage} className="pe_interactive_image__card__image" />
+			<div className={`sh-map-icon-card ${isShow ? 'sh-showed' : ''
+				}`} style={{
+					top: `calc(${top}% - 1.5rem)`,
+					left: `${left}%`,
+				}}>
+				<img decoding="async" src={image || defaultImage} className='sh-w-full' />
 				<h4>{title}</h4>
 			</div>
 		</a>

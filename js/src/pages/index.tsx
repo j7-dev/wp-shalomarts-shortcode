@@ -18,52 +18,54 @@ function DefaultPage() {
 	}, [bgRef])
 
 	return (
-		<div className="sh-flex">
-			<div ref={bgRef} className="sh-w-[80%] sh-aspect-[1.814143] sh-bg-cover sh-bg-no-repeat sh-bg-center sh-relative" style={{
-				backgroundImage: `url(${bg})`,
-			}}>
+		<div className="sh-flex sh-flex-col lg:sh-flex-row sh-gap-8 lg:sh-gap-0">
+			<div className='sh-w-full lg:sh-w-[80%] sh-aspect-[1.814143] sh-overflow-x-auto'>
+				<div ref={bgRef} className="sh-w-[800px] lg:sh-w-full sh-aspect-[1.814143] sh-bg-cover sh-bg-no-repeat sh-bg-center sh-relative" style={{
+					backgroundImage: `url(${bg})`,
+				}}>
 
-				<AbsImage
-					className='building1'
-					width={28}
-					top={65}
-					left={17}
-				/>
-
-				<AbsImage
-					className='building2'
-					width={30}
-					top={41}
-					left={54}
-				/>
-
-				<AbsImage
-					className='building3'
-					width={29}
-					top={42}
-					left={74}
-				/>
-
-				{MAP_DATA.map(({ postId, top, left, building }) => (
-					<MapIcon
-						key={`${postId}${top}${left}`}
-						building={building}
-						postId={postId}
-						top={top}
-						left={left}
+					<AbsImage
+						className='building1'
+						width={28}
+						top={65}
+						left={17}
 					/>
-				))}
 
-
-				{CARD_DATA.map((card) => (
-					<Card
-						key={card.postId}
-						{...card}
+					<AbsImage
+						className='building2'
+						width={30}
+						top={41}
+						left={54}
 					/>
-				))}
 
+					<AbsImage
+						className='building3'
+						width={29}
+						top={42}
+						left={74}
+					/>
+
+					{MAP_DATA.map(({ postId, top, left, building }) => (
+						<MapIcon
+							key={`${postId}${top}${left}`}
+							building={building}
+							postId={postId}
+							top={top}
+							left={left}
+						/>
+					))}
+
+
+					{CARD_DATA.map((card) => (
+						<Card
+							key={card.postId}
+							{...card}
+						/>
+					))}
+
+				</div>
 			</div>
-			<div className="sh-flex-1 sh-bg-white sh-p-4 sh-overflow-y-auto" style={{
+			<div className="sh-w-full lg:sh-flex-1 sh-bg-white sh-p-4 sh-overflow-y-auto" style={{
 				height,
 			}}>
 				{
