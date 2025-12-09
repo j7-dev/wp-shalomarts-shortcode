@@ -3,7 +3,7 @@
  * Plugin Name:       Shalomarts Shortcode | 青山家族專用 shortcode
  * Plugin URI:        https://github.com/j7-dev/wp-shalomarts-shortcode
  * Description:       青山家族專用 shortcode
- * Version:           0.0.4
+ * Version:           0.0.5
  * Requires at least: 5.7
  * Requires PHP:      8.1
  * Author:            J7
