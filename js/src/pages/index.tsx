@@ -19,7 +19,7 @@ function DefaultPage() {
 
 	return (
 		<div className="sh-flex sh-flex-col lg:sh-flex-row sh-gap-8 lg:sh-gap-0">
-			<div className='sh-w-full lg:sh-w-[80%] sh-aspect-square lg:sh-aspect-[1.814143] sh-overflow-x-auto sh-flex sh-items-end'>
+			<div className='sh-w-full sh-h-[500px] lg:sh-w-[80%] lg:sh-h-auto lg:sh-aspect-[1.814143] sh-overflow-x-auto sh-flex sh-items-end'>
 				<div ref={bgRef} className="sh-w-[800px] sh-h-[441px] lg:sh-h-auto lg:sh-w-full sh-aspect-[1.814143] sh-bg-cover sh-bg-no-repeat sh-bg-center sh-relative" style={{
 					backgroundImage: `url(${bg})`,
 				}}>
