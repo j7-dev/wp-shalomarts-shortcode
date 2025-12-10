@@ -4,6 +4,7 @@ import defaultImage from '@/assets/images/defaultImage.jpg'
 import { useAtomValue } from 'jotai'
 import { selectedDataAtom } from '@/pages/atom';
 
+
 export const Card: FC<TCardData> = ({
 	postId,
 	link,
@@ -13,6 +14,7 @@ export const Card: FC<TCardData> = ({
 	top,
 }) => {
 	const selectedData = useAtomValue(selectedDataAtom);
+	// const isShow = true;
 	const isShow = !!selectedData.postId && selectedData.postId === postId;
 	return (
 		<a href={link} target="_blank">

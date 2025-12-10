@@ -106,31 +106,31 @@ final class Bootstrap {
 			[
 				'postId'   => 32090,
 				'building' => 'building1',
-				'top'      => 61,
-				'left'     => 23,
+				'top'      => 60.7,
+				'left'     => 22.3,
 			],
 			[
 				'postId'   => 32084,
 				'building' => 'building1',
-				'top'      => 64,
-				'left'     => 22,
+				'top'      => 64.5,
+				'left'     => 22.5,
 			],
 			[
 				'postId'   => 32087,
 				'building' => 'building1',
-				'top'      => 69,
-				'left'     => 17,
+				'top'      => 71.5,
+				'left'     => 15.5,
 			],
 			[
 				'postId'   => 31564,
 				'building' => 'building2',
-				'top'      => 52,
-				'left'     => 50,
+				'top'      => 52.1,
+				'left'     => 51.2,
 			],
 			[
 				'postId'   => 32072,
 				'building' => 'building2',
-				'top'      => 47,
+				'top'      => 47.5,
 				'left'     => 53,
 			],
 			[
@@ -148,8 +148,8 @@ final class Bootstrap {
 			[
 				'postId'   => 31874,
 				'building' => 'building3',
-				'top'      => 52,
-				'left'     => 69,
+				'top'      => 53.1,
+				'left'     => 69.5,
 			],
 			[
 				'postId'   => 32075,
@@ -160,19 +160,19 @@ final class Bootstrap {
 			[
 				'postId'   => 31874,
 				'building' => 'building3',
-				'top'      => 52,
-				'left'     => 77,
+				'top'      => 54.5,
+				'left'     => 73.5,
 			],
 			[
 				'postId'   => 32081,
 				'building' => 'building3',
 				'top'      => 48,
-				'left'     => 77,
+				'left'     => 77.6,
 			],
 			[
 				'postId'   => 32069,
 				'building' => 'building3',
-				'top'      => 48,
+				'top'      => 48.5,
 				'left'     => 81,
 			],
 		];
@@ -211,21 +211,38 @@ final class Bootstrap {
 	 * 'top': int
 	 * }> */
 	private static function get_card_data(): array {
+		$card_position = [
+			'building1' => [
+				'left' => 22,
+				'top'  => 61,
+			],
+			'building2' => [
+				'left' => 66,
+				'top'  => 46,
+			],
+			'building3' => [
+				'left' => 66,
+				'top'  => 46,
+			],
+		];
+
 		$map_data  = self::get_map_data();
 		$post_ids  = self::get_unique_post_ids();
 		$card_data = [];
 		foreach ($post_ids as $post_id) {
-			$maps     = array_filter($map_data, static fn( $item ) => $item['postId'] === $post_id);
-			$avg_left = array_sum(array_column($maps, 'left')) / count($maps);
-			$min_top  = min(array_column($maps, 'top'));
+			$maps         = array_filter($map_data, static fn( $item ) => $item['postId'] === $post_id);
+			$map          = reset($maps);
+			$map_building = $map['building'];
+			$left         = $card_position[ $map_building ]['left'];
+			$top          = $card_position[ $map_building ]['top'];
 
 			$card_data[] = [
 				'postId' => $post_id,
 				'title'  => \get_the_title( $post_id ) ?: '文章標題',
 				'link'   => \get_permalink( $post_id ) ?: \site_url(),
 				'image'  => \get_the_post_thumbnail_url( $post_id ) ?: '',
-				'left'   => $avg_left,
-				'top'    => $min_top,
+				'left'   => $left,
+				'top'    => $top,
 			];
 		}
 

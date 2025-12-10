@@ -10,7 +10,7 @@ import { v4wp } from '@kucrut/vite-for-wp'
 
 export default defineConfig({
   server: {
-		port: 5174,
+		port: 5176,
 		cors: {
 			origin: '*',
 		},

@@ -21,7 +21,14 @@ export const MapIcon: FC<{
 		const [selectedData, setSelectedData] = useAtom(selectedDataAtom);
 
 		useEffect(() => {
-			if (!hovering) return;
+			if (!hovering) {
+				setSelectedData({
+					postId: 0,
+					selectAllIcons: false,
+					building: undefined,
+				})
+				return;
+			}
 			setSelectedData({
 				postId,
 				selectAllIcons: false,
