@@ -1,6 +1,6 @@
 {
 	"name": "create-shalomarts-shortcode",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"type": "module",
 	"scripts": {
 		"bootstrap": "pnpm && composer install --no-interaction",
