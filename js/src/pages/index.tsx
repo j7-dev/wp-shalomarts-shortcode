@@ -45,11 +45,12 @@ function DefaultPage() {
 						left={74}
 					/>
 
-					{MAP_DATA.map(({ postId, top, left, building }) => (
+					{MAP_DATA.map(({ postId, top, left, building, link }) => (
 						<MapIcon
 							key={`${postId}${top}${left}`}
 							building={building}
 							postId={postId}
+							link={link}
 							top={top}
 							left={left}
 						/>

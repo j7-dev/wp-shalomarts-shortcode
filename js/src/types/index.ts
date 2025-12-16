@@ -4,6 +4,7 @@ export * from './dataProvider'
 export type TMapData = {
 		building: string,
 		postId: number,
+		link: string,
 		top: number,
 		left: number,
 	}

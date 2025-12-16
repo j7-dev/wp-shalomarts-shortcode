@@ -102,7 +102,7 @@ final class Bootstrap {
 	 */
 	private static function get_map_data(): array {
 
-		return [
+		$raw_data = [
 			[
 				'postId'   => 32090,
 				'building' => 'building1',
@@ -176,6 +176,16 @@ final class Bootstrap {
 				'left'     => 81,
 			],
 		];
+
+$data = array_map(
+			static function ( $item ): array {
+				$item['link'] = \get_permalink( (int) $item['postId'] ) ?: \site_url();
+				return $item;
+			},
+			$raw_data
+		);
+
+		return $data;
 	}
 
 	/**
